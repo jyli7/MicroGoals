@@ -18,20 +18,41 @@ var currentItem = MicroGoal()
 
 class FirstViewController: UIViewController {
 
-    @IBOutlet weak var tempItemName: UILabel!
     @IBOutlet weak var item: UITextField!
     
-    @IBOutlet weak var timeChosen: UIDatePicker!
+    @IBOutlet weak var timePicker: UIDatePicker!
+    
+    @IBOutlet weak var itemLabel: UILabel!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var currentlyWorkingOn: UILabel!
+    
+    @IBOutlet weak var timeLeftLabel: UILabel!
     
     @IBAction func addItem(sender: AnyObject) {
         currentItem.name = item.text
-        currentItem.time = timeChosen.countDownDuration
+        currentItem.time = timePicker.countDownDuration
         currentItem.completed = false
-        tempItemName.text = currentItem.name
+        
+        itemLabel.hidden = true
+        item.hidden = true
+        timeLabel.hidden = true
+        timePicker.hidden = true
+        
+        currentlyWorkingOn.text = currentItem.name
+        currentlyWorkingOn.hidden = false
+        timeLeftLabel.hidden = false
+        timeLeftLabel.text = currentItem.time.description
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        itemLabel.textAlignment = NSTextAlignment.Center
+        timeLabel.textAlignment = NSTextAlignment.Center
+        timePicker.countDownDuration = 1800
+        currentlyWorkingOn.hidden = true
+        timeLeftLabel.hidden = true
         // Do any additional setup after loading the view, typically from a nib.
     }
 
